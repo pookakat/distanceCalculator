@@ -73,16 +73,18 @@ const geoCodingFun = async function(address){
 
 const makeDisplay = async function(addresses){
     var start = addresses[0].waypoint;
+    $('ul').empty();
     for (var i=1; i<addresses.length; i++){
         var endPoint = addresses[i].name;
         console.log(endPoint);
-        $('ul').append(`<li class="${endPoint}">${endPoint}: </li>`)
+        $('ul').append(`<li class="${endPoint}"></li>`)
         var end = addresses[i].waypoint;
         calcDistance(start, end, endPoint);
     }
 }
 
 const calcDistance = async function(waypoint0, waypoint1, divClass){
+    console.log(divClass);
     console.log(waypoint0, waypoint1);
     var platform = new H.service.Platform({
         'apikey': `${key}`
@@ -98,11 +100,12 @@ const calcDistance = async function(waypoint0, waypoint1, divClass){
     function(result){
         distance = result.response.route[0].summary.distance * 0.00062137;
         distance = distance.toFixed(2);
+        $(`.${divClass}`).empty();
         if (distance <= 30){
-        $(`.${divClass}`).append(`${distance} miles away`);
+        $(`.${divClass}`).append(`${divClass}: ${distance} miles away`);
         }
         else{
-        $(`.${divClass}`).append(`Seriously! Do you really want to drive ${distance} miles??`);    
+        $(`.${divClass}`).append(`${divClass}: Seriously! Do you really want to drive ${distance} miles??`);    
         }
     }, function(error){
         console.error(error);
