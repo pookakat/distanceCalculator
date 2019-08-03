@@ -98,7 +98,12 @@ const calcDistance = async function(waypoint0, waypoint1, divClass){
     function(result){
         distance = result.response.route[0].summary.distance * 0.00062137;
         distance = distance.toFixed(2);
+        if (distance <= 30){
         $(`.${divClass}`).append(`${distance} miles away`);
+        }
+        else{
+        $(`.${divClass}`).append(`Seriously! Do you really want to drive ${distance} miles??`);    
+        }
     }, function(error){
         console.error(error);
     });
