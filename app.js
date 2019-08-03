@@ -27,10 +27,15 @@ $('#start-app').click(function(event){
     event.preventDefault(event);
     var name = $('#name').val().trim();
     var location = $('#location').val().trim();
+    var email = $('#email').val().trim();
+
+    var emailHash = hex_md5(email);
+    $('#avatar').html(`<img src="https://www.gravatar.com/avatar/${emailHash}" />`)
 
     var newUser = {
         'name': name,
         'address': location,
+        'email': email,
         'waypoint': ''
     };
     addresses.unshift(newUser);
@@ -76,7 +81,6 @@ const makeDisplay = async function(addresses){
     $('ul').empty();
     for (var i=1; i<addresses.length; i++){
         var endPoint = addresses[i].name;
-        console.log(endPoint);
         $('ul').append(`<li class="${endPoint}"></li>`)
         var end = addresses[i].waypoint;
         calcDistance(start, end, endPoint);
@@ -84,8 +88,6 @@ const makeDisplay = async function(addresses){
 }
 
 const calcDistance = async function(waypoint0, waypoint1, divClass){
-    console.log(divClass);
-    console.log(waypoint0, waypoint1);
     var platform = new H.service.Platform({
         'apikey': `${key}`
         });

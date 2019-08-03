@@ -14,16 +14,21 @@
                 <input type="text" id="name" name="name">
             </div>
             <div>
-            <label for="location">Your address (please include full street name, city and state):</label>
-            <input type="text" id="location" name="location">
+                <label for="email">Your email address (don't worry, we don't do spam):</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div>
+                <label for="location">Your address (please include full street name, city and state):</label>
+                <input type="text" id="location" name="location">
             </div>
             <button type="submit" id="start-app">Get available plots</button>
         </form>
-    <h1>People</h1>
+    <h1>People close to <span id="avatar"></span></h1>
     <hr>
     <div id="addresses">
         <ul id="list"></ul>
     </div>
+    <script src="md5.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
   type="text/javascript" charset="utf-8"></script>
 <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
